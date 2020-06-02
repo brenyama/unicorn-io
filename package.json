@@ -1,0 +1,49 @@
+{
+  "name": "super-duper-octo-broccoli",
+  "version": "1.0.0",
+  "description": "CS solo project",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=production nodemon server/server.js",
+    "build": "NODE_ENV=production webpack",
+    "dev": "concurrently \"NODE_ENV=development nodemon server/server.js\" \"webpack-dev-server --open\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "build",
+      "client"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brenyama/super-duper-octo-broccoli.git"
+  },
+  "author": "Bren Yamaguch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brenyama/super-duper-octo-broccoli/issues"
+  },
+  "homepage": "https://github.com/brenyama/super-duper-octo-broccoli#readme",
+  "dependencies": {
+    "css-loader": "^3.5.3",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.16",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "style-loader": "^1.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
+    "babel-loader": "^8.1.0",
+    "concurrently": "^5.2.0",
+    "cross-env": "^7.0.2",
+    "nodemon": "^2.0.4",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

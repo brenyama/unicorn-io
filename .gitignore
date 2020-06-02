@@ -1,0 +1,5 @@
+node_modules
+server/default.json
+build/*.js
+npm-debug.log
+.DS_Store
