@@ -1,37 +1,79 @@
-// models/Book.js
-
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const BookSchema = new Schema({
+const CommentSchema = new Schema({
+  text: {
+    type: String,
+    required: true,
+  },
+  position: {
+    x_loc: {
+      type: Number,
+      required: true,
+    },
+    y_loc: {
+      type: Number,
+      required: true,
+    }
+  },
+  // created_by: {
+  //   type: String,
+  //   required: true
+  // },
+  published_date: {
+    type: Date
+  },
+  resolved: {
+    type: Boolean,
+  },
+  // responses: [this] LETS DO THIS LATER 
+})
+
+const Comments = mongoose.model('comments', CommentSchema);
+
+const BoardSchema = new Schema({
   title: {
-    type: String,
-    required: true
-  },
-  isbn: {
-    type: String,
-    required: true
-  },
-  author: {
     type: String,
     required: true
   },
   description: {
     type: String
   },
+  // created_by: {
+  //   type: String,
+  //   required: true
+  // },
   published_date: {
     type: Date
   },
-  publisher: {
+  comments: [CommentSchema]
+})
+
+const Boards = mongoose.model('boards', BoardSchema);
+
+const ProjectSchema = new Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  description: {
     type: String
   },
-  updated_date: {
-    type: Date,
-    default: Date.now
-  }
+  // created_by: {
+  //   type: String,
+  //   required: true
+  // },
+  published_date: {
+    type: Date
+  },
+  boards: [BoardSchema]
 });
 
-const Book = mongoose.model('book', BookSchema);
+const Projects = mongoose.model('projects', ProjectSchema);
 
-module.exports = Book;
+module.exports = {
+  Projects,
+  Comments,
+  Boards,
+};
