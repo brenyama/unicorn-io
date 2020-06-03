@@ -1,0 +1,15 @@
+.container {
+  border: 1px solid red;
+}
+
+#projectList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.project {
+  border: 1px solid red;
+  width: 25%;
+  height: 150px;
+}

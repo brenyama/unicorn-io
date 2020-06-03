@@ -5,13 +5,15 @@ module.exports = {
   entry: './client/index.js',
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/build/',
   },
   devServer: {
-    publicPath: '/build/',
     proxy: {
-      '/api': 'http://localhost:3000'
-    }
+      '/api': 'http://localhost:3000',
+    },
+    // historyApiFallback: true
+    historyApiFallback: true,
   },
   module: {
     rules: [

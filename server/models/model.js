@@ -40,6 +40,10 @@ const BoardSchema = new Schema({
   description: {
     type: String
   },
+  image_url: {
+    type: String,
+    required: true
+  },
   // created_by: {
   //   type: String,
   //   required: true
