@@ -13,8 +13,8 @@ export default class Comment extends Component {
     const { comment, commentIndex, openThread, closeAllThreads, resolveComment } = this.props;
     return (
       <div className={styles.comment} style={{
-        'top': comment.position.y_loc,
-        'left': comment.position.x_loc,
+        'top': comment.position.y_loc + '%',
+        'left': comment.position.x_loc + '%',
         'zIndex': comment.threadOpen ? '100' : '0'
       }} >
         {comment.threadOpen ? <div className={styles.dummyExitBG} onClick={closeAllThreads} /> : null}

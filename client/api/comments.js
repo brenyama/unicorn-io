@@ -8,7 +8,9 @@ export const createComment = (pid, bid, params) => {
   })
     .then(response => response.json())
     .then(data => data)
-    .catch(err => err)
+    .catch(err => {
+      throw err;
+    })
 }
 
 export const updateComment = (pid, bid, cid, params) => {
@@ -21,5 +23,7 @@ export const updateComment = (pid, bid, cid, params) => {
   })
     .then(response => response.json())
     .then(data => data)
-    .catch(err => err)
+    .catch(err => {
+      throw err;
+    })
 }

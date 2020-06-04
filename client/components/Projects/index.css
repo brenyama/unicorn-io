@@ -1,13 +1,8 @@
 .container {
-  border: 1px solid red;
+  padding: 50px;
 }
 
-#projectList {
-}
-
-.project {
-  flex: 1 1 25%;
-  border: 1px solid red;
-  height: 150px;
-  margin: 10px 50px;
+.content {
+  margin: 0 auto;
+  max-width: 860px;
 }

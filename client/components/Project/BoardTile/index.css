@@ -1,0 +1,41 @@
+.container {
+  position: relative;
+  width: 25vw;
+  max-width: 600px;
+  box-shadow: 0 3px 40px 15px rgba(0, 0, 0, 0.02);
+  margin: 25px;
+  transition: all 0.5 ease;
+  z-index: -1;
+}
+
+.container:hover {
+  box-shadow: 0 3px 32px 1px rgba(0, 0, 0, 0.1);
+  transition: all 0.5 ease;
+}
+
+.wrapper {
+  position: relative;
+  padding-bottom: 100%;
+}
+
+.tileFooter {
+  position: absolute;
+  bottom: 0;
+  padding: 24px 24px;
+  width: 100%;
+  background-color: white;
+}
+
+.tileFooter p {
+  margin: 10px 0;
+  font-size: 1.5rem;
+}
+
+.title {
+  color: #4b4b4b;
+}
+
+.description {
+  color: #747474;
+  font-size: 1.0rem;
+}

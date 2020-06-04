@@ -1,0 +1,13 @@
+.container {
+  /* border: 1px solid red; */
+  padding: 50px;
+}
+
+.container button {
+  margin-left: 25px;
+}
+
+.boardList {
+  display: flex;
+  flex-wrap: wrap;
+}

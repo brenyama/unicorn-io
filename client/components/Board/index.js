@@ -56,13 +56,18 @@ export default class Board extends Component {
 
   openCreateComment(e) {
 
-    const x_rel = e.pageX - e.target.getBoundingClientRect().x;
-    const y_rel = e.pageY - e.target.getBoundingClientRect().y;
+    const x_rel = e.pageX - e.target.getBoundingClientRect().x - window.scrollX;
+    const y_rel = e.pageY - e.target.getBoundingClientRect().y - window.scrollY;
+
+    const target_height = e.target.getBoundingClientRect().bottom - e.target.getBoundingClientRect().top;
+    const target_width = e.target.getBoundingClientRect().right - e.target.getBoundingClientRect().left;
+
+    console.log(target_width, target_height)
 
     this.setState({
       createComment: {
-        x_loc: x_rel,
-        y_loc: y_rel
+        x_loc: x_rel/target_width * 100,
+        y_loc: y_rel/target_height * 100,
       }
     })
   }

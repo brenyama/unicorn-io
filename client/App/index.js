@@ -20,7 +20,9 @@ export default class App extends Component {
     return (
       <Router history={customHistory}>
         <div className={styles.container}>
-          <Link to={'/'}><h4>Projects</h4></Link>
+          <div className={styles.nav}>
+            <Link to={'/'}><h4>Projects</h4></Link>
+          </div>
           <Switch>
             <Route exact path="/" component={Projects} />
             <Route exact path="/projects/:pid" component={Project} />

@@ -11,7 +11,6 @@ const Comments = models.Comments;
 // require in any controllers here
 // const xController = require('../controllers/xControlelr')
 
-
 /**
  * Projects API
  */
@@ -19,7 +18,8 @@ const Comments = models.Comments;
 router.get('/projects', (req, res) => {
   Projects.find({} , (err, projects) => {
     if (err) res.status(404).json(err)
-    res.json(projects)
+
+    return res.json(projects)
   });
 })
 
@@ -31,21 +31,24 @@ router.post('/projects', (req, res) => {
     boards: []
   }, (err, project) => {
     if (err) return res.status(404).json(err)
-    res.status(200).json(project)
+
+    return res.status(201).json(project)
   })
 })
 
 router.get('/projects/:id', (req, res) => {
   Projects.findById(req.params.id, (err, project) => {
-    if (err) res.status(404).json(err)
-    res.json(project)
+    if (!project || err) res.status(404).json(err)
+
+    return res.status(200).json(project)
   })
 })
 
 router.delete('/projects/:id', (req, res) => {
   Projects.findByIdAndDelete(req.params.id, (err, project) => {
-    if (err) return res.status(404).json(err)
-    res.json(project)
+    if (!project || err) return res.status(404).json(err)
+
+    res.status(200).json(project)
   })
 })
 
@@ -55,14 +58,15 @@ router.delete('/projects/:id', (req, res) => {
 
 router.get('/projects/:id/boards', (req, res) => {
   Projects.findById(req.params.id, (err, project) => {
-    if (err) return res.status(404).json(err)
-    res.json(project.boards)
+    if (!project || err) return res.status(404).json(err)
+
+    return res.json(project.boards)
   })
 })
 
 router.post('/projects/:id/boards', (req, res) => {
   Projects.findById(req.params.id, (err, project) => {
-    if (err) return res.status(404).json(err)
+    if (!project || err) return res.status(404).json(err)
 
     const newBoard = new Boards({
       ...req.body,
@@ -74,26 +78,27 @@ router.post('/projects/:id/boards', (req, res) => {
 
     project.save((err) => {
       if (err) return res.status(400).json(err);
-      res.status(200).send(newBoard);
+
+      return res.status(200).send(newBoard);
     });
   })
 })
 
 router.get('/projects/:pid/boards/:bid', (req, res) => {
   Projects.findById(req.params.pid, (err, project) => {
-    if (err) return res.status(404).json(err)
+    if (!project || err) return res.status(404).json(err)
     
     const board = project.boards.id(req.params.bid)
     if (!board) return res.status(404).send('error, couldnt find board')
 
-    res.status(200).json(board)
+    return res.status(200).json(board)
   })
 })
 
 
 router.delete('/projects/:pid/boards/:bid', (req, res) => {
   Projects.findById(req.params.pid, (err, project) => {
-    if (err) return res.status(404).json(err)
+    if (!project || err) return res.status(404).json(err)
     
     const board = project.boards.id(req.params.bid)  
     if (!board) return res.status(404).send('error, couldnt find board')
@@ -102,7 +107,7 @@ router.delete('/projects/:pid/boards/:bid', (req, res) => {
 
     project.save((err) => {
       if (err) return res.status(400).json(err);
-      res.status(200).json(board)
+      return res.status(200).json(board)
     });
   })
 })
@@ -113,18 +118,18 @@ router.delete('/projects/:pid/boards/:bid', (req, res) => {
 
 router.get('/projects/:pid/boards/:bid/comments', (req, res) => {
   Projects.findById(req.params.pid, (err, project) => {
-    if (err) return res.status(404).json(err)
+    if (!project || err) return res.status(404).json(err)
 
     const board = project.boards.id(req.params.bid)  
     if (!board) return res.status(404).send('error, couldnt find board')
 
-    res.status(200).json(board.comments);
+    return res.status(200).json(board.comments);
   })
 })
 
 router.post('/projects/:pid/boards/:bid/comments', (req, res) => {
   Projects.findById(req.params.pid, (err, project) => {
-    if (err) return res.status(404).json(err)
+    if (!project || err) return res.status(404).json(err)
 
     const board = project.boards.id(req.params.bid);
     if (!board) return res.status(404).send('error, couldnt find board');
@@ -140,14 +145,14 @@ router.post('/projects/:pid/boards/:bid/comments', (req, res) => {
     project.save((err) => {
       if (err) res.status(400).json(err);
 
-      res.status(200).json(newComment)
+      res.status(201).json(newComment)
     });
   })
 })
 
 router.get('/projects/:pid/boards/:bid/comments/:cid', (req, res) => {
   Projects.findById(req.params.pid, (err, project) => {
-    if (err) return res.status(404).json(err)
+    if (!project || err) return res.status(404).json(err)
 
     const board = project.boards.id(req.params.bid);
     if (!board) return res.status(404).send('error, couldnt find board');
@@ -155,13 +160,13 @@ router.get('/projects/:pid/boards/:bid/comments/:cid', (req, res) => {
     const comment = board.comments.id(req.params.cid);
     if (!comment) return res.status(404).json(err);
 
-    res.status(200).json(comment)
+    return res.status(200).json(comment)
   })
 })
 
 router.delete('/projects/:pid/boards/:bid/comments/:cid', (req, res) => {
   Projects.findById(req.params.pid, (err, project) => {
-    if (err) return res.status(404).json(err);
+    if (!project || err) return res.status(404).json(err);
 
     const board = project.boards.id(req.params.bid);
     if (!board) return res.status(404).json(err);
@@ -173,14 +178,15 @@ router.delete('/projects/:pid/boards/:bid/comments/:cid', (req, res) => {
 
     project.save((err) => {
       if (err) return res.status(400).json(err);
-      res.status(200).json(comment)
+
+      return res.status(200).json(comment)
     });
   })
 })
 
 router.patch('/projects/:pid/boards/:bid/comments/:cid', (req, res) => {
   Projects.findById(req.params.pid, (err, project) => {
-    if (err) return res.status(404).json(err);
+    if (!project || err) return res.status(404).json(err);
 
     const board = project.boards.id(req.params.bid);
     if (!board) return res.status(404).json(err);
@@ -194,13 +200,10 @@ router.patch('/projects/:pid/boards/:bid/comments/:cid', (req, res) => {
 
     project.save((err) => {
       if (err) return res.status(400).json(err);
-      res.status(200).json(updatedComment)
+
+      return res.status(200).json(updatedComment)
     });
   })
 })
-
-
-
-
 
 module.exports = router;

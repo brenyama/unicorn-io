@@ -1,5 +1,5 @@
 .container {
-  background-color: #fbfbfb;
+  background-color: rgb(243, 246, 247);
   width: 100%;
   height: 100%;
 }
@@ -12,17 +12,21 @@
 .board {
   position: relative;
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .boardImg {
+  flex: 0 1 auto;
   position: relative;
-  width: auto;
-  height: auto;
-  margin-top: -15vh;
-  box-shadow: 0 2px 2px 4px rgba(0, 0, 0, 0.01)
+  width: auto;  
+  margin-top: 15vh;
+  margin-bottom: 10%;
+  box-shadow: 0 2px 2px 4px rgba(0, 0, 0, 0.01);
+}
+
+.boardImg img {
+  width: 100%;
 }

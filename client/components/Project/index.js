@@ -4,7 +4,11 @@ import { getBoards } from '../../api/boards';
 import {
   Link,
   useParams
-} from "react-router-dom";
+} from 'react-router-dom';
+import { createBoard } from '../../api/boards'
+
+import CreateBoard from './CreateBoard'
+import BoardTile from './BoardTile'
 
 export default class Project extends Component {
 
@@ -13,6 +17,7 @@ export default class Project extends Component {
 
     this.state = {
       boards: [],
+      createBoardOpen: false,
     }
   }
 
@@ -29,22 +34,60 @@ export default class Project extends Component {
     });
   }
 
+  openCreateBoard() {
+    this.setState({
+      createBoardOpen: true,
+    })
+  }
+
+  closeCreateBoard() {
+    this.setState({
+      createBoardOpen: false,
+    })
+  }
+
+  createBoard(title, description, image_url) {
+    const { boards } = this.state;
+    const { match: { params } } = this.props;
+    
+    createBoard(params.pid, {
+      title,
+      description,
+      image_url,
+    }).then(response => {
+      console.log(response)
+      const updatedBoards = [ ...boards ]
+
+      updatedBoards.push(response);
+
+      this.setState({
+        boards: updatedBoards
+      })
+
+      this.closeCreateBoard();
+    })
+  }
+
   render() {
 
-    const { boards } = this.state;
+    const { boards, createBoardOpen } = this.state;
     const { match: { params } } = this.props;
 
     const boardsList = boards.map((board, i) => {
       return (
         <Link to={`/projects/${params.pid}/boards/${board._id}`}>
-          <div key={`board-${i}`} className={styles.board}>{board.title}</div>
+          <BoardTile key={`boardtile-${i}`} title={board.title} description={board.description} image_url={board.image_url} />
         </Link>
       )
-    })
+    }).reverse();
 
     return (
       <div className={styles.container}>
-        {boardsList}
+        {createBoardOpen ? <CreateBoard closeCreateBoard={() => {this.closeCreateBoard()}} createBoard={(title, description, image_url) => { this.createBoard(title, description, image_url) }} /> : null}
+        <button className={'btn-primary'} onClick={() => {this.openCreateBoard()}}>create board</button>
+        <div className={styles.boardList}>
+          {boardsList}
+        </div>
       </div>
     )
   }

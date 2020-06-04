@@ -16,13 +16,13 @@ export default class CreateFloater extends Component {
 
     return (
       <div className={styles.container} style={{
-        "top": y_loc,
-        "left": x_loc
+        "top": y_loc + '%',
+        "left": x_loc + '%'
       }}>
         <div className={styles.floater}>
           <h5>Post a comment</h5>
           <div className={styles.inputRow}>
-            <input
+            <textarea
               placeholder="type something here..."
               onClick={(e) => {e.stopPropagation()}}
               onChange={(e) => {

@@ -5,8 +5,28 @@
   font-family: Arial, Helvetica, sans-serif
 }
 
+body {
+  background-color: rgb(243, 246, 247);
+}
+
 .container {
-  color: red;
+  color: #4b4b4b;
+}
+
+.nav {
+  padding: 64px 24px 8px 24px;
+  box-shadow: 0 0px 15px 16px rgba(0, 0, 0, 0.02);
+  background-color: white;
+}
+
+.nav h4 {
+  font-size: 18px;
+  color: #4b4b4b;
+
+}
+
+:global button:focus {
+  outline: 0;
 }
 
 :global .btn-floater {
@@ -26,4 +46,41 @@
   color: white;
   font-size: 12px;
   transition: all 0.2s ease-in-out;
+}
+
+:global .btn-primary {
+  display: block;
+  background-color: rgb(28, 110, 235);
+  border: rgb(28, 110, 235);
+  padding: 16px;
+  border-radius: 2rem;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 12px 0 0 0;
+}
+
+:global input,
+:global textarea {
+  border: 1px solid lightgrey;
+  color: #4b4b4b;
+  border-radius: 3px;
+}
+
+:global input::placeholder,
+:global textarea::placeholder {
+  color: lightgrey;
+}
+
+:global input:focus,
+:global textarea:focus {
+  outline: none;
+}
+
+:global a {
+  text-decoration: none;
+}
+
+:global a:visited {
+  text-decoration: none;
 }
