@@ -74,9 +74,8 @@ router.post('/projects/:id/boards', (req, res) => {
 
     project.save((err) => {
       if (err) return res.status(400).json(err);
+      res.status(200).send(newBoard);
     });
-
-    res.status(200).send(newBoard);
   })
 })
 
@@ -103,9 +102,8 @@ router.delete('/projects/:pid/boards/:bid', (req, res) => {
 
     project.save((err) => {
       if (err) return res.status(400).json(err);
+      res.status(200).json(board)
     });
-
-    res.status(200).json(board)
   })
 })
 
@@ -134,16 +132,16 @@ router.post('/projects/:pid/boards/:bid/comments', (req, res) => {
     const newComment = new Comments({
       ...req.body,
       published_date: new Date(),
-      resolved: false,
+      resolved: false
     })
 
     board.comments.push(newComment)
     
     project.save((err) => {
-      if (err) return res.status(400).json(err);
-    });
+      if (err) res.status(400).json(err);
 
-    res.status(200).json(newComment)
+      res.status(200).json(newComment)
+    });
   })
 })
 
@@ -175,9 +173,8 @@ router.delete('/projects/:pid/boards/:bid/comments/:cid', (req, res) => {
 
     project.save((err) => {
       if (err) return res.status(400).json(err);
+      res.status(200).json(comment)
     });
-
-    res.status(200).json(comment)
   })
 })
 
@@ -197,9 +194,8 @@ router.patch('/projects/:pid/boards/:bid/comments/:cid', (req, res) => {
 
     project.save((err) => {
       if (err) return res.status(400).json(err);
+      res.status(200).json(updatedComment)
     });
-
-    res.status(200).json(updatedComment)
   })
 })
 

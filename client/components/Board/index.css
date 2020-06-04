@@ -2,11 +2,21 @@
   background-color: #fbfbfb;
   width: 100%;
   height: 100%;
+}
+
+.info {
+  position: absolute;
+  padding: 30px;
+}
+
+.board {
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
 }
 
 .boardImg {

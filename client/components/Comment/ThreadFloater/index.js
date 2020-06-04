@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import styles from './index.css';
 
 export default class ThreadFloater extends Component {
+
   render() {
-    const { comment, closeAllThreads } = this.props;
+    const { comment, resolveComment } = this.props;
     return (
       <div className={styles.container}>
-        {comment.text}
+        <p>{comment.text}</p>
+        <button className={'btn-floater'} onClick={resolveComment}>resolve</button>
       </div>
     )
   }

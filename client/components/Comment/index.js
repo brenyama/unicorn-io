@@ -10,18 +10,18 @@ export default class Comment extends Component {
   }
 
   render() {
-    const { comment, commentIndex, openThread, closeAllThreads } = this.props;
+    const { comment, commentIndex, openThread, closeAllThreads, resolveComment } = this.props;
     return (
       <div className={styles.comment} style={{
         'top': comment.position.y_loc,
         'left': comment.position.x_loc,
-        'z-index': comment.threadOpen ? '100' : '0'
+        'zIndex': comment.threadOpen ? '100' : '0'
       }} >
         {comment.threadOpen ? <div className={styles.dummyExitBG} onClick={closeAllThreads} /> : null}
 
         <div className={styles.bubble} onClick={openThread}>{commentIndex + 1}</div>
-        
-        {comment.threadOpen ? <ThreadFloater comment={comment} closeAllThreads={closeAllThreads} /> : null}
+
+        {comment.threadOpen ? <ThreadFloater comment={comment} resolveComment={resolveComment} /> : null}
       </div>
     )
   }

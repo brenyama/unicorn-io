@@ -8,3 +8,22 @@
 .container {
   color: red;
 }
+
+:global .btn-floater {
+  display: block;
+  background-color: transparent;
+  border: 1px solid darkorange;
+  padding: 3px;
+  border-radius: 3px;
+  color: darkorange;
+  font-size: 12px;
+  margin: 12px 0 0 0;
+}
+
+:global .btn-floater:hover {
+  background-color: darkorange;
+  border: 1px solid darkorange;
+  color: white;
+  font-size: 12px;
+  transition: all 0.2s ease-in-out;
+}

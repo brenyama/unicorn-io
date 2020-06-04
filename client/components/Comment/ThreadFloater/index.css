@@ -5,9 +5,14 @@
   left: 30px;
   border-radius: 4px;
   box-shadow: 0 3px 8px 3px rgba(0, 0, 0, 0.02);
-  padding: 8px;
+  padding: 12px;
   color: #484848;
   font-weight: 500;
+  min-width: 200px;
+}
+
+.container p {
+  font-size: 14px;
 }
 
 .dummyExitBG {

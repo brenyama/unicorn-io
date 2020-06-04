@@ -42,7 +42,6 @@ export default class Projects extends Component {
 
     return (
       <div className={styles.container}>
-        <h1>Project List</h1>
         <div id={styles.projectList}>
           {projectList}
         </div>

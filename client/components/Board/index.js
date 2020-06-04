@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import styles from './index.css';
 import { getBoard } from '../../api/boards';
 import Comment from '../Comment';
+import { createComment, updateComment } from '../../api/comments';
+import CreateFloater from '../Comment/CreateFloater';
 
 export default class Board extends Component {
 
@@ -10,6 +12,7 @@ export default class Board extends Component {
     this.state = {
       board: null,
       comments: [],
+      createComment: null,
     }
   }
 
@@ -28,7 +31,6 @@ export default class Board extends Component {
   }
 
   closeAllThreads() {
-    console.log('hello')
     const { comments } = this.state;
     const updatedComments = [...comments];
 
@@ -43,7 +45,6 @@ export default class Board extends Component {
   }
 
   openThread(commentIndex) {
-    console.log('no')
     const { comments } = this.state;
     const updatedComments = [...comments];
     updatedComments[commentIndex].threadOpen = true;
@@ -53,22 +54,101 @@ export default class Board extends Component {
     })
   }
 
-  render() {
+  openCreateComment(e) {
 
-    const { board, comments } = this.state;
-    console.log(comments)
+    const x_rel = e.pageX - e.target.getBoundingClientRect().x;
+    const y_rel = e.pageY - e.target.getBoundingClientRect().y;
+
+    this.setState({
+      createComment: {
+        x_loc: x_rel,
+        y_loc: y_rel
+      }
+    })
+  }
+
+  createComment(text, x_loc, y_loc) {
+    const { pid, bid } = this.props.match.params;
+    const { comments } = this.state;
+
+    createComment(pid, bid, {
+      "text": text,
+      "position": {
+        "x_loc": x_loc,
+        "y_loc": y_loc
+      }
+    })
+      .then((response) => {
+        const updatedComments = [...comments];
+        updatedComments.push(response)
+
+        this.setState({
+          comments: updatedComments,
+        })
+
+        this.closeCreateFloater();
+      })
+  }
+
+  closeCreateFloater() {
+    this.setState({
+      createComment: null,
+    })
+  }
+
+  resolveComment(pid, bid, cid, commentIndex) {
+    const { comments } = this.state;
+
+    updateComment(pid, bid, cid, {
+      resolved: true
+    }).then(response => {
+      const updatedComments = [...comments];
+      updatedComments[commentIndex].resolved = true;
+
+      this.setState({
+        comments: updatedComments,
+      })
+
+      this.closeAllThreads;
+    })
+  }
+
+  render() {
+    const { pid, bid } = this.props.match.params;
+    const { board, comments, createComment } = this.state;
     let commentList = null;
     if (board) {
       commentList = comments.map((comment, i) => {
-        return <Comment key={`comment-${i}`} comment={comment} commentIndex={i} openThread={() => {this.openThread(i)}} closeAllThreads={() => {this.closeAllThreads()}} />
+        if (comment.resolved) return null;
+        return <Comment 
+          key={`comment-${i}`}
+          comment={comment}
+          commentIndex={i}
+          openThread={(e) => {e.stopPropagation(); this.openThread(i)}}
+          closeAllThreads={(e) => {e.stopPropagation(); this.closeAllThreads()}}
+          resolveComment={(e) => {e.stopPropagation(); this.resolveComment(pid, bid, comment._id, i)}}
+        />
       })
     }
 
     return(
       <div className={styles.container} >
-        <div className={styles.boardImg}>
-          {commentList}
-          {board && board.image_url ? <img src={board.image_url} /> : null}
+        <div className={styles.info}>
+          <div className={styles.title}>{board ? board.title : null}</div>
+          <div className={styles.description}>{board ? board.description : null}</div>
+        </div>
+        <div className={styles.board}>
+          <div className={styles.boardImg} onClick={(e) => {this.openCreateComment(e)}}>
+            {commentList}
+            {createComment ?
+              <CreateFloater
+                x_loc={createComment.x_loc}
+                y_loc={createComment.y_loc}
+                closeCreateFloater={(e) => {e.stopPropagation(); this.closeCreateFloater()}}
+                createComment={(text, x, y) => this.createComment(text, x, y)}
+              /> : null}
+            {board && board.image_url ? <img src={board.image_url} /> : null}
+          </div>
         </div>
       </div>
     )
