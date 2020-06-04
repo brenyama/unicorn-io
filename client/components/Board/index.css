@@ -30,3 +30,12 @@
 .boardImg img {
   width: 100%;
 }
+
+.title {
+  color: #4b4b4b;
+}
+
+.description {
+  color: rgb(175, 175, 175);
+  margin: 4px 0;
+}

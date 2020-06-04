@@ -3,6 +3,17 @@
   padding: 50px;
 }
 
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 1rem 0;
+}
+
+.description {
+  margin-bottom: 48px;
+}
+
 .container button {
   margin-left: 25px;
 }
@@ -10,4 +21,14 @@
 .boardList {
   display: flex;
   flex-wrap: wrap;
+}
+
+.empty {
+  margin: 50px 25px;
+}
+
+.breakLine {
+  height: 1px;
+  background-color: lightgrey;
+  margin: 48px 0;
 }

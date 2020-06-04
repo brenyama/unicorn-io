@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   padding: 24px;
   background-color: white;
   margin: 24px 0;
@@ -29,4 +30,18 @@
   color: #4b4b4b;
   font-size: 16px;
   text-decoration: none;
+}
+
+.deleteProj {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  color: grey;
+  background-color: white;
+  box-shadow: 0 0 32px 25px rgba(0, 0, 0, 0.01);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
 }

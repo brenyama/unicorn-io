@@ -29,3 +29,15 @@ export const createBoard = (pid, params) => {
     throw err
   })
 }
+
+export const deleteBoard = (pid, bid) => {
+  return fetch(`/api/projects/${pid}/boards/${bid}`, {
+    method: 'DELETE',
+  })
+    .then(response => response.json())
+    .then(data => data)
+    .catch(err => {
+      console.log(`error when deleting board: ${err}`)
+      throw err;
+    })
+}

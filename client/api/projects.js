@@ -1,3 +1,4 @@
+
 export const getProjects = () => {
   return fetch('/api/projects')
     .then(response => response.json())
@@ -19,4 +20,24 @@ export const createProject = (params) => {
   .catch(err => {
     throw err
   })
+}
+
+export const deleteProject = (pid) => {
+  return fetch(`/api/projects/${pid}`, {
+    method: 'DELETE',
+  })
+    .then(response => response.json())
+    .then(data => data)
+    .catch(err => {
+      throw err
+    })
+}
+
+export const getProject = (pid) => {
+  return fetch(`/api/projects/${pid}`)
+    .then(response => response.json())
+    .then(data => data)
+    .catch(err => {
+      throw err
+    })
 }

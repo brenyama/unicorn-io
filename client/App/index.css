@@ -14,7 +14,8 @@ body {
 }
 
 .nav {
-  padding: 64px 24px 8px 24px;
+  position: relative;
+  padding: 20px 24px;
   box-shadow: 0 0px 15px 16px rgba(0, 0, 0, 0.02);
   background-color: white;
 }
@@ -22,7 +23,17 @@ body {
 .nav h4 {
   font-size: 18px;
   color: #4b4b4b;
+}
 
+.logo span {
+  position: relative;
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.logo img {
+  width: 40px;
+  height: auto;
 }
 
 :global button:focus {
@@ -32,26 +43,25 @@ body {
 :global .btn-floater {
   display: block;
   background-color: transparent;
-  border: 1px solid darkorange;
-  padding: 3px;
-  border-radius: 3px;
-  color: darkorange;
-  font-size: 12px;
+  border: 1px solid #F42A79;
+  padding: 0.3rem 0.8rem;
+  border-radius: 2rem;
+  color: #F42A79;
+  font-size: 1.0rem;
   margin: 12px 0 0 0;
 }
 
 :global .btn-floater:hover {
-  background-color: darkorange;
-  border: 1px solid darkorange;
+  background-color: #F42A79;
+  border: 1px solid #F42A79;
   color: white;
-  font-size: 12px;
   transition: all 0.2s ease-in-out;
 }
 
 :global .btn-primary {
   display: block;
-  background-color: rgb(28, 110, 235);
-  border: rgb(28, 110, 235);
+  background-color: #F42A79;
+  border: #F42A79;
   padding: 16px;
   border-radius: 2rem;
   color: white;

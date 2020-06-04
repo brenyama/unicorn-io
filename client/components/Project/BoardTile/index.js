@@ -4,19 +4,25 @@ import styles from './index.css';
 export default class BoardTile extends Component {
 
   render() {
-    const { title, description, image_url } = this.props
+    const { title, description, image_url, deleteBoard, pid, bid } = this.props
 
     return (
-      <div class={styles.container}>
-        <div class={styles.wrapper} style={{
+      <div className={styles.container}>
+        <div className={styles.wrapper} style={{
             'background': `url(${image_url})`,
             'backgroundSize' : 'cover',
             'backgroundPosition': 'center center'
           }}>
-          <div class={styles.tileFooter}>
-            <p class={styles.title}>{title}</p>
-            <p class={styles.description}>{description}</p>
+          <div className={styles.tileFooter}>
+            <p className={styles.title}>{title}</p>
+            <p className={styles.description}>{description}</p>
+            <button className={styles.delete}>delete</button>
           </div>
+        </div>
+        <div className={styles.tileFooter}>
+          <p className={styles.title}>{title}</p>
+          <p className={styles.description}>{description}</p>
+          <button className={styles.delete + ' btn-floater'} onClick={(e) => {e.preventDefault(); e.stopPropagation(); deleteBoard(pid, bid)}}>delete</button>
         </div>
       </div>
     )

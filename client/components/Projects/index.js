@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from './index.css';
-import { getProjects } from '../../api/projects';
+import { getProjects, deleteProject } from '../../api/projects';
 import { Link } from 'react-router-dom';
 
 import CreateProject from './CreateProject';
@@ -64,13 +64,29 @@ export default class Projects extends Component {
     })
   }
 
+  deleteProject(pid) {
+    const { projects } = this.state;
+
+    deleteProject(pid)
+      .then(response => {
+        let updatedProjects = [ ...projects ]
+
+        updatedProjects = updatedProjects.filter(project => project._id !== response._id)
+
+        this.setState({
+          projects: updatedProjects
+        })
+
+      })
+  }
+
   render() {
     const { projects, createProjectOpen } = this.state;
 
     const projectList = projects.map((project, i) => {
       return (
         <Link key={`project-${i}`} to={`/projects/${project._id}`}>
-          <ProjectTile title={project.title} description={project.description} />
+          <ProjectTile pid={project._id} title={project.title} description={project.description} deleteProject={(pid) => {this.deleteProject(pid)}} />
         </Link>
       )
     }).reverse();

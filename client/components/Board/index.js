@@ -62,8 +62,6 @@ export default class Board extends Component {
     const target_height = e.target.getBoundingClientRect().bottom - e.target.getBoundingClientRect().top;
     const target_width = e.target.getBoundingClientRect().right - e.target.getBoundingClientRect().left;
 
-    console.log(target_width, target_height)
-
     this.setState({
       createComment: {
         x_loc: x_rel/target_width * 100,
